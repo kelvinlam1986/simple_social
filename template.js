@@ -7,6 +7,13 @@ export default () => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>MERN Kickstart</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <style>
+              a{
+                text-decoration: none
+              }
+        </style>
     </head>
     <body>
         <div id="root"></div>
