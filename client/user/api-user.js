@@ -71,4 +71,4 @@ const remove = (params, credentials) => {
     });
 };
 
-return { create, list, read, update, remove };
+export { create, list, read, update, remove };

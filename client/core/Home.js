@@ -7,6 +7,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import seashellImg from './../assets/images/seashell.jpg';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     card: {
@@ -39,6 +40,7 @@ class Home extends Component {
                         Welcome to the MERN Skeleton home page.
                     </Typography>
                 </CardContent>
+                <Link to="/users">Users</Link>
             </Card>
         );
     }
