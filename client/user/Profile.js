@@ -59,12 +59,12 @@ class Profile extends Component {
     }
 
     render() {
-        const { classes } = this.state;
+        const { classes } = this.props;
         const redirectToSignIn = this.state.redirectToSignIn;
         if (redirectToSignIn) {
             <Redirect to="/signin" />
         }
-
+        console.log('token', auth.isAuthenticated(),  'auth user id',auth.isAuthenticated().user._id, 'state user id', this.state.user._id)
         return (
             <Paper className={classes.root} elevation={4}>
                 <Typography type="title" className={classes.title}>Profile</Typography>
@@ -77,9 +77,9 @@ class Profile extends Component {
                         </ListItemAvatar>
                         <ListItemText primary={this.state.user.name} secondary={this.state.user.email} />
                         {
-                            auth.isAuthenticated().user && auth.isAuthenticated.user._userid == this.state.user._id && (
+                            auth.isAuthenticated().user && auth.isAuthenticated().user._id == this.state.user._id && (
                                 <ListItemSecondaryAction>
-                                    <Link to={"/user/edit" + this.state.user._id}>
+                                    <Link to={"/user/edit/" + this.state.user._id}>
                                         <IconButton color="primary">
                                             <Edit />
                                         </IconButton>

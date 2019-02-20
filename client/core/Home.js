@@ -43,6 +43,8 @@ class Home extends Component {
                 <Link to="/users">Users</Link>
                 <Link to="/signup">Sign up</Link>
                 <Link to="/signin">Sign in</Link>
+                <Link to="/user/5c6cec1e18dde56d798f8293">Profile</Link>
+                <Link to="/user/edit/5c6cec1e18dde56d798f8293">Edit Profile</Link>
             </Card>
         );
     }

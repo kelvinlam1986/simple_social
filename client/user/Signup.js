@@ -71,11 +71,7 @@ class SignUp extends Component {
 
     render() {
         const { classes } = this.props;
-        const { from } = this.props.location.state || {
-            from: {
-                pathname: '/'
-            }
-        }
+       
         return (
             <div>
                 <Card className={classes.card}>
@@ -109,7 +105,7 @@ class SignUp extends Component {
                         }
                     </CardContent>
                     <CardActions>
-                        <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
+                        <Button color="primary" variant="contained" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
                     </CardActions>
                 </Card>
                 <Dialog open={this.state.open} disableBackdropClick={true}>

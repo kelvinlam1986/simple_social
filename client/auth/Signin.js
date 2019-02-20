@@ -46,7 +46,7 @@ class SignIn extends Component {
 
     clickSubmit = () => {
         const user = {
-            email: this.state.user || undefined,
+            email: this.state.email || undefined,
             password: this.state.password || undefined
         };
         
@@ -104,7 +104,7 @@ class SignIn extends Component {
                     }
                 </CardContent>
                 <CardActions>
-                    <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
+                    <Button color="primary" variant="contained" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
                 </CardActions>
             </Card>
         )
