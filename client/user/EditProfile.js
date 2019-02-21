@@ -49,6 +49,7 @@ class EditProfile extends Component {
             email: '',
             password: '',
             redirectToProfile: false,
+            redirectToUsers: false,
             error: ''
         }
 
@@ -87,6 +88,10 @@ class EditProfile extends Component {
                });
     }
 
+    clickCancel = () => {
+        this.setState({ redirectToUsers: true });
+    }
+
     handleChange = name => event => {
         this.setState({ [name]: event.target.value });
     }
@@ -95,6 +100,10 @@ class EditProfile extends Component {
         const { classes } = this.props;
         if (this.state.redirectToProfile) {
             return (<Redirect to={'/user/' + this.state.userId } />)
+        }
+
+        if (this.state.redirectToUsers) {
+            return (<Redirect to={'/users' } />)
         }
 
         return (
@@ -129,6 +138,7 @@ class EditProfile extends Component {
                 </CardContent>
                 <CardActions>
                     <Button color="primary" variant="contained" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
+                    <Button color="secondary" variant="contained" onClick={this.clickSubmit} className={classes.submit}>Cancel</Button>
                 </CardActions>
             </Card>
         )
