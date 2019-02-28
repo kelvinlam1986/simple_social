@@ -10,6 +10,16 @@ import PrivateRoute from './auth/PrivateRoute';
 import Menu from './core/Menu';
 
 class MainRouter extends Component {
+
+    // Removes the server-side injected css when React component mounts
+    componentDidMount() {
+        console.log('MainRouter component did amount');
+        const jssStyles = document.getElementById('jss-server-side');
+        if (jssStyles && jssStyles.parentNode) {
+            jssStyles.parentNode.removeChild(jssStyles);
+        }
+    }
+
     render() {
         return (
             <div>
