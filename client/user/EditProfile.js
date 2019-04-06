@@ -10,6 +10,7 @@ import Icon from '@material-ui/core/Icon';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import CardHeader from '@material-ui/core/CardHeader';
+import { FileCopy } from '@material-ui/icons'
 import auth from '../auth/auth-helper';
 import { read, update } from './api-user';
 
@@ -33,9 +34,15 @@ const styles = theme => ({
         marginRight: theme.spacing.unit,
         width: 300
     },
+    input: {
+        display: 'none'
+    },
     submit: {
         margin: 'auto',
         marginBottom: theme.spacing.unit * 2
+    },
+    filename: {
+        marginLeft: '10px'
     }
 });
 
@@ -44,6 +51,9 @@ class EditProfile extends Component {
     constructor({match}) {
         super();
         this.state = {
+            name: '',
+            about: '',
+            photo: '',
             userId: '',
             name: '',
             email: '',
@@ -57,14 +67,14 @@ class EditProfile extends Component {
     }
 
     componentDidMount = () => {
+        this.userData = new FormData();
         const jwt = auth.isAuthenticated();
-        console.log('jwt', jwt, 'token', jwt.totken);
         read({ userId: this.match.params.userId },
             {t: jwt.token}).then((data) => {
                 if (data.error) {
                     this.setState({ error: data.error });
                 } else {
-                    this.setState({ name: data.name, email: data.email });
+                    this.setState({ id: data._id, name: data.name, email: data.email, about: data.about });
                 }
             })
 
@@ -75,11 +85,12 @@ class EditProfile extends Component {
         const user = {
             name: this.state.name || undefined,
             email: this.state.email || undefined,
-            password: this.state.password || undefined
+            password: this.state.password || undefined,
+            about: this.state.about || undefined
         }
 
         update({ userId: this.match.params.userId },
-               { t: jwt.token}, user).then((data) => {
+               { t: jwt.token}, this.userData).then((data) => {
                    if (data.error) {
                        this.setState({ error: data.error })
                    } else {
@@ -93,7 +104,11 @@ class EditProfile extends Component {
     }
 
     handleChange = name => event => {
-        this.setState({ [name]: event.target.value });
+        const value = name === 'photo' 
+            ? event.target.files[0]
+            : event.target.value;
+        this.userData.set(name, value)
+        this.setState({ [name]: value });
     }
 
     render() {
@@ -110,11 +125,34 @@ class EditProfile extends Component {
             <Card className={classes.card}>
                 <CardHeader title="Edit Profile" />
                 <CardContent>
+                    
+                    <input accept="image/*" type="file"
+                        onChange={this.handleChange('photo')}
+                        className={classes.input}
+                        id="icon-button-file" />
+                    <label htmlFor="icon-button-file">
+                        <Button variant="contained" color="default" component="span">
+                            Upload
+                            <FileCopy />
+                        </Button>
+                    </label>
+                    <label>
+                        <span className={classes.filename}>
+                            {this.state.photo ? this.state.photo.name : ''}
+                        </span>
+                    </label> <br />
                     <TextField id="name" label="Name"
                             className={classes.textField}
                             value={this.state.name}
                             onChange={this.handleChange('name')}
                             margin="normal" /> <br />
+                    <TextField id="standard-multiline-flexible"
+                        label="About"
+                        multiline
+                        rowsMax="4"
+                        value={this.state.about}
+                        className={classes.textField}
+                        onChange={this.handleChange("about")} /> <br/>
                     <TextField id="email" label="Email"
                         type="email"
                         className={classes.textField}
@@ -135,6 +173,7 @@ class EditProfile extends Component {
                             </Typography>
                         )
                     }
+
                 </CardContent>
                 <CardActions>
                     <Button color="primary" variant="contained" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>

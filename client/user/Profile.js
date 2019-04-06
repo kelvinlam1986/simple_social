@@ -28,6 +28,11 @@ const styles = theme => ({
     title: {
         margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 2}px`,
         color: theme.palette.protectedTitle
+    },
+    bigAvatar: {
+        width: 60,
+        height: 60,
+        margin: 10
     }
 })
 
@@ -60,7 +65,9 @@ class Profile extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log('user', this.state.user);
+        const photoUrl = this.state.user
+            ? `/api/users/photo/${this.state.user._id}?${new Date().getTime()}`
+            : '/api/users/defaultPhoto';
         const redirectToSignIn = this.state.redirectToSignIn;
         if (redirectToSignIn) {
             return (<Redirect to="/signin" />)
@@ -74,9 +81,7 @@ class Profile extends Component {
                         <List dense>
                             <ListItem>
                                 <ListItemAvatar>
-                                    <Avatar>
-                                        <Person />
-                                    </Avatar>
+                                    <Avatar src={photoUrl} className={classes.bigAvatar}></Avatar>
                                 </ListItemAvatar>
                                 <ListItemText primary={ this.state.user.name} secondary={this.state.user.email} />
                                 {
@@ -95,6 +100,9 @@ class Profile extends Component {
                             <Divider />
                             <ListItem>
                                 <ListItemText primary={"Joined: " + (new Date(this.state.user.created)).toDateString()} />
+                            </ListItem>
+                            <ListItem>
+                                <ListItemText primary={this.state.user.about} />
                             </ListItem>
                         </List>
                     ) : null

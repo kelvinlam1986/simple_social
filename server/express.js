@@ -28,8 +28,8 @@ const app = express();
 devBundle.compile(app);
 
 /* configure express */
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json()).use(express.urlencoded());
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compress());
 app.use(helmet());
@@ -40,9 +40,7 @@ app.use('/', userRoutes);
 app.use('/', authRoutes);
 
 app.get('*', (req, res) => {
-    console.log('aaaaa');
     const sheetRegistry = new SheetsRegistry();
-    console.log('sheetRegistry', sheetRegistry);
     const theme = createMuiTheme({
         palette: {
             primary: {

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto';
+import { Buffer } from 'buffer';
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -23,6 +24,14 @@ const UserSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+    about: {
+        type: String,
+        trim: true
+    },
+    photo: {
+        data: Buffer,
+        contentType: String
     }
 });
 
