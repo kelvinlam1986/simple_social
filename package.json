@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "development": "nodemon",
-    "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
+    "build": "webpack --config webpack.config.client.production.js && webpack --config webpack.config.server.production.js",
     "start": "NODE_ENV=production && node ./dist/server.generated.js",
-    "production": "npm run build && npm run start"
+    "production": "npm run build && npm run start",
+    "build2": "webpack def.js -o defg.js"
   },
   "dependencies": {
     "@material-ui/core": "^3.9.2",

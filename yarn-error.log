@@ -1,17 +1,30 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe D:\Buildagent\npm-cache\node_modules\yarn\bin\yarn.js
+  /usr/bin/node /usr/bin/yarn add babel-transform-runtime --dev
 
 PATH: 
-  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\app\lsminh\product\11.1.0\client_1\bin;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\110\DTS\Binn\;C:\Program Files (x86)\Bitvise SSH Client;C:\Program Files\dotnet\;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\VisualSVN\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files\nodejs\;C:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\Go\bin;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Users\lsminh\AppData\Local\Programs\Git\cmd;C:\Users\lsminh\.dnx\runtimes\dnx-clr-win-x86.1.0.0-rc1-update2\bin;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Skype\Phone\;C:\Users\lsminh\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;D:\app\lsminh\product\11.1.0\client_1\bin;D:\Buildagent\npm-cache;C:\Program Files\Microsoft VS Code\bin;C:\Users\lsminh\AppData\Roaming\npm;C:\Users\lsminh\.dotnet\tools;C:\GoProject\bin;D:\protoc\bin;C:\Program Files\MongoDB\Server\3.6\bin\;;C:\Program Files\Docker Toolbox;D:\maven\bin;D:\curl-7.63.0-win64-mingw\bin;D:\glide-v0.13.2-windows-amd64\windows-amd64;D:\protoc-3.6.1-win32\bin;
+  /home/ubuntu/bin:/home/ubuntu/.local/bin:/home/ubuntu/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.dotnet/tools:/home/ubuntu/.dotnet/tools
 
 Yarn version: 
-  1.5.1
+  1.16.0
 
 Node version: 
-  8.11.1
+  10.15.3
 
 Platform: 
-  win32 x64
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/babel-transform-runtime: Not found
+      at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:66091:18)
+      at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:129590:22)
+      at Request.emit (events.js:189:13)
+      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:130562:10)
+      at Request.emit (events.js:189:13)
+      at IncomingMessage.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:130484:12)
+      at Object.onceWrapper (events.js:277:13)
+      at IncomingMessage.emit (events.js:194:15)
+      at endReadableNT (_stream_readable.js:1125:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -21,28 +34,29 @@ npm manifest:
     "main": "index.js",
     "scripts": {
       "development": "nodemon",
-      "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
-      "start": "Set NODE_ENV=production && node ./dist/server.generated.js"
+      "build": "webpack --config webpack.config.client.production.js && webpack --config webpack.config.server.production.js",
+      "start": "NODE_ENV=production && node ./dist/server.generated.js",
+      "production": "npm run build && npm run start"
     },
     "dependencies": {
+      "@material-ui/core": "^3.9.2",
+      "@material-ui/icons": "^3.0.2",
       "body-parser": "^1.18.2",
       "compression": "^1.7.2",
       "cookie-parser": "^1.4.3",
       "cors": "^2.8.4",
-      "helmet": "^3.12.0",
-      "jsonwebtoken": "^8.2.1",
       "express": "4.16.3",
       "express-jwt": "^5.3.1",
-      "mongoose": "^5.0.16",
-      "mongodb": "3.0.7",
+      "helmet": "^3.12.0",
+      "jsonwebtoken": "^8.2.1",
       "lodash": "^4.17.10",
+      "mongodb": "3.0.7",
+      "mongoose": "^5.0.16",
       "react": "16.3.2",
       "react-dom": "16.3.2",
       "react-hot-loader": "4.1.2",
       "react-router": "^4.2.0",
-      "react-router-dom": "^4.2.2",
-      "material-ui": "^1.0.0-beta.43",
-      "material-ui-icons": "^1.0.0-beta.36"
+      "react-router-dom": "^4.2.2"
     },
     "devDependencies": {
       "babel-core": "6.26.2",
@@ -50,13 +64,13 @@ npm manifest:
       "babel-preset-env": "1.6.1",
       "babel-preset-react": "6.24.1",
       "babel-preset-stage-2": "6.24.1",
+      "file-loader": "^1.1.11",
       "nodemon": "1.17.3",
       "webpack": "4.6.0",
       "webpack-cli": "2.0.15",
       "webpack-dev-middleware": "3.1.2",
       "webpack-hot-middleware": "2.22.1",
-      "webpack-node-externals": "1.7.2",
-      "file-loader": "^1.1.11",
+      "webpack-node-externals": "1.7.2"
     },
     "author": "minh lam",
     "license": "ISC"
@@ -70,18 +84,67 @@ Lockfile:
   # yarn lockfile v1
   
   
-  "@babel/runtime@7.0.0-beta.42":
-    version "7.0.0-beta.42"
-    resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.42.tgz#352e40c92e0460d3e82f49bd7e79f6cda76f919f"
-    dependencies:
-      core-js "^2.5.3"
-      regenerator-runtime "^0.11.1"
-  
-  "@babel/runtime@^7.0.0-beta.42", "@babel/runtime@^7.1.2":
+  "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0":
     version "7.3.1"
     resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
     dependencies:
       regenerator-runtime "^0.12.0"
+  
+  "@material-ui/core@^3.9.2":
+    version "3.9.2"
+    resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.9.2.tgz#41ed1a470e981d199829eb5d9317a671c66a6f7d"
+    dependencies:
+      "@babel/runtime" "^7.2.0"
+      "@material-ui/system" "^3.0.0-alpha.0"
+      "@material-ui/utils" "^3.0.0-alpha.2"
+      "@types/jss" "^9.5.6"
+      "@types/react-transition-group" "^2.0.8"
+      brcast "^3.0.1"
+      classnames "^2.2.5"
+      csstype "^2.5.2"
+      debounce "^1.1.0"
+      deepmerge "^3.0.0"
+      dom-helpers "^3.2.1"
+      hoist-non-react-statics "^3.2.1"
+      is-plain-object "^2.0.4"
+      jss "^9.8.7"
+      jss-camel-case "^6.0.0"
+      jss-default-unit "^8.0.2"
+      jss-global "^3.0.0"
+      jss-nested "^6.0.1"
+      jss-props-sort "^6.0.0"
+      jss-vendor-prefixer "^7.0.0"
+      normalize-scroll-left "^0.1.2"
+      popper.js "^1.14.1"
+      prop-types "^15.6.0"
+      react-event-listener "^0.6.2"
+      react-transition-group "^2.2.1"
+      recompose "0.28.0 - 0.30.0"
+      warning "^4.0.1"
+  
+  "@material-ui/icons@^3.0.2":
+    version "3.0.2"
+    resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-3.0.2.tgz#d67a6dd1ec8312d3a88ec97944a63daeef24fe10"
+    dependencies:
+      "@babel/runtime" "^7.2.0"
+      recompose "0.28.0 - 0.30.0"
+  
+  "@material-ui/system@^3.0.0-alpha.0":
+    version "3.0.0-alpha.2"
+    resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-3.0.0-alpha.2.tgz#096e80c8bb0f70aea435b9e38ea7749ee77b4e46"
+    dependencies:
+      "@babel/runtime" "^7.2.0"
+      deepmerge "^3.0.0"
+      prop-types "^15.6.0"
+      warning "^4.0.1"
+  
+  "@material-ui/utils@^3.0.0-alpha.2":
+    version "3.0.0-alpha.3"
+    resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-3.0.0-alpha.3.tgz#836c62ea46f5ffc6f0b5ea05ab814704a86908b1"
+    dependencies:
+      "@babel/runtime" "^7.2.0"
+      prop-types "^15.6.0"
+      react-is "^16.6.3"
   
   "@mrmlnc/readdir-enhanced@^2.2.1":
     version "2.2.1"
@@ -98,7 +161,7 @@ Lockfile:
     version "0.7.0"
     resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
   
-  "@types/jss@^9.3.0":
+  "@types/jss@^9.5.6":
     version "9.5.7"
     resolved "https://registry.yarnpkg.com/@types/jss/-/jss-9.5.7.tgz#fa57a6d0b38a3abef8a425e3eb6a53495cb9d5a0"
     dependencies:
@@ -1649,7 +1712,7 @@ Lockfile:
     version "1.2.7"
     resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   
-  core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0, core-js@^2.5.3:
+  core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0:
     version "2.6.4"
     resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.4.tgz#b8897c062c4d769dd30a0ac5c73976c47f92ea0d"
   
@@ -1742,7 +1805,7 @@ Lockfile:
     dependencies:
       is-in-browser "^1.0.2"
   
-  csstype@^2.0.0, csstype@^2.2.0:
+  csstype@^2.0.0, csstype@^2.2.0, csstype@^2.5.2:
     version "2.6.2"
     resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.2.tgz#3043d5e065454579afc7478a18de41909c8a2f01"
   
@@ -1782,6 +1845,10 @@ Lockfile:
     version "3.0.3"
     resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   
+  debounce@^1.1.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
+  
   debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
     version "2.6.9"
     resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -1818,9 +1885,9 @@ Lockfile:
     version "0.6.0"
     resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
   
-  deepmerge@^2.0.1:
-    version "2.2.1"
-    resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
+  deepmerge@^3.0.0:
+    version "3.1.0"
+    resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.1.0.tgz#a612626ce4803da410d77554bfd80361599c034d"
   
   define-properties@^1.1.2:
     version "1.1.3"
@@ -2321,6 +2388,13 @@ Lockfile:
     dependencies:
       escape-string-regexp "^1.0.5"
   
+  file-loader@^1.1.11:
+    version "1.1.11"
+    resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-1.1.11.tgz#6fe886449b0f2a936e43cabaac0cdbfb369506f8"
+    dependencies:
+      loader-utils "^1.0.2"
+      schema-utils "^0.4.5"
+  
   filename-regex@^2.0.0:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/filename-regex/-/filename-regex-2.0.1.tgz#c1c4b9bee3e09725ddb106b75c1e301fe2f18b26"
@@ -2556,7 +2630,7 @@ Lockfile:
       is-windows "^1.0.1"
       which "^1.2.14"
   
-  global@^4.3.0, global@~4.3.0:
+  global@^4.3.0:
     version "4.3.2"
     resolved "https://registry.yarnpkg.com/global/-/global-4.3.2.tgz#e76989268a6c74c38908b1305b10fc0e394e9d0f"
     dependencies:
@@ -2788,6 +2862,12 @@ Lockfile:
   hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
     version "2.5.5"
     resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  
+  hoist-non-react-statics@^3.2.1:
+    version "3.3.0"
+    resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
+    dependencies:
+      react-is "^16.7.0"
   
   home-or-tmp@^2.0.0:
     version "2.0.0"
@@ -3109,10 +3189,6 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-2.0.0.tgz#a3b30a5c4f199183167aaab93beefae3ddfb654f"
   
-  is-function@^1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/is-function/-/is-function-1.0.1.tgz#12cfb98b65b57dd3d193a3121f5f6e2f437602b5"
-  
   is-glob@^2.0.0, is-glob@^2.0.1:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-2.0.1.tgz#d096f926a3ded5600f3fdfd91198cb0888c2d863"
@@ -3372,31 +3448,15 @@ Lockfile:
       lodash.once "^4.0.0"
       ms "^2.1.1"
   
-  jss-camel-case@^6.0.0, jss-camel-case@^6.1.0:
+  jss-camel-case@^6.0.0:
     version "6.1.0"
     resolved "https://registry.yarnpkg.com/jss-camel-case/-/jss-camel-case-6.1.0.tgz#ccb1ff8d6c701c02a1fed6fb6fb6b7896e11ce44"
     dependencies:
       hyphenate-style-name "^1.0.2"
   
-  jss-compose@^5.0.0:
-    version "5.0.0"
-    resolved "https://registry.yarnpkg.com/jss-compose/-/jss-compose-5.0.0.tgz#ce01b2e4521d65c37ea42cf49116e5f7ab596484"
-    dependencies:
-      warning "^3.0.0"
-  
   jss-default-unit@^8.0.2:
     version "8.0.2"
     resolved "https://registry.yarnpkg.com/jss-default-unit/-/jss-default-unit-8.0.2.tgz#cc1e889bae4c0b9419327b314ab1c8e2826890e6"
-  
-  jss-expand@^5.3.0:
-    version "5.3.0"
-    resolved "https://registry.yarnpkg.com/jss-expand/-/jss-expand-5.3.0.tgz#02be076efe650125c842f5bb6fb68786fe441ed6"
-  
-  jss-extend@^6.2.0:
-    version "6.2.0"
-    resolved "https://registry.yarnpkg.com/jss-extend/-/jss-extend-6.2.0.tgz#4af09d0b72fb98ee229970f8ca852fec1ca2a8dc"
-    dependencies:
-      warning "^3.0.0"
   
   jss-global@^3.0.0:
     version "3.0.0"
@@ -3408,30 +3468,9 @@ Lockfile:
     dependencies:
       warning "^3.0.0"
   
-  jss-preset-default@^4.3.0:
-    version "4.5.0"
-    resolved "https://registry.yarnpkg.com/jss-preset-default/-/jss-preset-default-4.5.0.tgz#d3a457012ccd7a551312014e394c23c4b301cadd"
-    dependencies:
-      jss-camel-case "^6.1.0"
-      jss-compose "^5.0.0"
-      jss-default-unit "^8.0.2"
-      jss-expand "^5.3.0"
-      jss-extend "^6.2.0"
-      jss-global "^3.0.0"
-      jss-nested "^6.0.1"
-      jss-props-sort "^6.0.0"
-      jss-template "^1.0.1"
-      jss-vendor-prefixer "^7.0.0"
-  
   jss-props-sort@^6.0.0:
     version "6.0.0"
     resolved "https://registry.yarnpkg.com/jss-props-sort/-/jss-props-sort-6.0.0.tgz#9105101a3b5071fab61e2d85ea74cc22e9b16323"
-  
-  jss-template@^1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/jss-template/-/jss-template-1.0.1.tgz#09aed9d86cc547b07f53ef355d7e1777f7da430a"
-    dependencies:
-      warning "^3.0.0"
   
   jss-vendor-prefixer@^7.0.0:
     version "7.0.0"
@@ -3439,7 +3478,7 @@ Lockfile:
     dependencies:
       css-vendor "^0.3.8"
   
-  jss@^9.3.3, jss@^9.7.0:
+  jss@^9.8.7:
     version "9.8.7"
     resolved "https://registry.yarnpkg.com/jss/-/jss-9.8.7.tgz#ed9763fc0f2f0260fc8260dac657af61e622ce05"
     dependencies:
@@ -3465,10 +3504,6 @@ Lockfile:
   kareem@2.3.0:
     version "2.3.0"
     resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.3.0.tgz#ef33c42e9024dce511eeaf440cd684f3af1fc769"
-  
-  keycode@^2.1.9:
-    version "2.2.0"
-    resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
   
   keyv@3.0.0:
     version "3.0.0"
@@ -3616,7 +3651,7 @@ Lockfile:
     version "4.3.2"
     resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
   
-  lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0:
+  lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
     version "4.17.11"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   
@@ -3689,45 +3724,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/map-visit/-/map-visit-1.0.0.tgz#ecdca8f13144e660f1b5bd41f12f3479d98dfb8f"
     dependencies:
       object-visit "^1.0.0"
-  
-  material-ui-icons@^1.0.0-beta.36:
-    version "1.0.0-beta.36"
-    resolved "https://registry.yarnpkg.com/material-ui-icons/-/material-ui-icons-1.0.0-beta.36.tgz#86390a61f4c83f718eaba77ccce575834f2cf2a8"
-    dependencies:
-      recompose "^0.26.0"
-  
-  material-ui@^1.0.0-beta.43:
-    version "1.0.0-beta.47"
-    resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.47.tgz#5deb97dc3e694299992d3c3cacb44051f8bc2166"
-    dependencies:
-      "@babel/runtime" "^7.0.0-beta.42"
-      "@types/jss" "^9.3.0"
-      "@types/react-transition-group" "^2.0.8"
-      brcast "^3.0.1"
-      classnames "^2.2.5"
-      deepmerge "^2.0.1"
-      dom-helpers "^3.2.1"
-      hoist-non-react-statics "^2.5.0"
-      jss "^9.3.3"
-      jss-camel-case "^6.0.0"
-      jss-default-unit "^8.0.2"
-      jss-global "^3.0.0"
-      jss-nested "^6.0.1"
-      jss-props-sort "^6.0.0"
-      jss-vendor-prefixer "^7.0.0"
-      keycode "^2.1.9"
-      lodash "^4.2.0"
-      normalize-scroll-left "^0.1.2"
-      prop-types "^15.6.0"
-      react-event-listener "^0.5.1"
-      react-jss "^8.1.0"
-      react-lifecycles-compat "^3.0.0"
-      react-popper "^0.10.0"
-      react-scrollbar-size "^2.0.2"
-      react-transition-group "^2.2.1"
-      recompose "^0.26.0 || ^0.27.0"
-      scroll "^2.0.3"
-      warning "^3.0.0"
   
   math-random@^1.0.1:
     version "1.0.4"
@@ -4603,7 +4599,7 @@ Lockfile:
     dependencies:
       asap "~2.0.3"
   
-  prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+  prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
     version "15.7.1"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.1.tgz#2fa61e0a699d428b40320127733ee2931f05d9d1"
     dependencies:
@@ -4691,12 +4687,6 @@ Lockfile:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
   
-  rafl@~1.2.1:
-    version "1.2.2"
-    resolved "https://registry.yarnpkg.com/rafl/-/rafl-1.2.2.tgz#fe930f758211020d47e38815f5196a8be4150740"
-    dependencies:
-      global "~4.3.0"
-  
   randomatic@^3.0.0:
     version "3.1.1"
     resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-3.1.1.tgz#b776efc59375984e36c537b2f51a1f0aff0da1ed"
@@ -4758,14 +4748,13 @@ Lockfile:
       object-assign "^4.1.1"
       prop-types "^15.6.0"
   
-  react-event-listener@^0.5.1:
-    version "0.5.10"
-    resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.5.10.tgz#378403c555fe616f312891507a742ecbbe2c90de"
+  react-event-listener@^0.6.2:
+    version "0.6.6"
+    resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.6.6.tgz#758f7b991cad9086dd39fd29fad72127e1d8962a"
     dependencies:
-      "@babel/runtime" "7.0.0-beta.42"
-      fbjs "^0.8.16"
+      "@babel/runtime" "^7.2.0"
       prop-types "^15.6.0"
-      warning "^3.0.0"
+      warning "^4.0.1"
   
   react-hot-loader@4.1.2:
     version "4.1.2"
@@ -4778,30 +4767,13 @@ Lockfile:
       react-lifecycles-compat "^3.0.2"
       shallowequal "^1.0.2"
   
-  react-is@^16.8.1:
+  react-is@^16.6.3, react-is@^16.7.0, react-is@^16.8.1:
     version "16.8.1"
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.1.tgz#a80141e246eb894824fb4f2901c0c50ef31d4cdb"
   
-  react-jss@^8.1.0:
-    version "8.6.1"
-    resolved "https://registry.yarnpkg.com/react-jss/-/react-jss-8.6.1.tgz#a06e2e1d2c4d91b4d11befda865e6c07fbd75252"
-    dependencies:
-      hoist-non-react-statics "^2.5.0"
-      jss "^9.7.0"
-      jss-preset-default "^4.3.0"
-      prop-types "^15.6.0"
-      theming "^1.3.0"
-  
-  react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
+  react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
     version "3.0.4"
     resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
-  
-  react-popper@^0.10.0:
-    version "0.10.4"
-    resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.10.4.tgz#af2a415ea22291edd504678d7afda8a6ee3295aa"
-    dependencies:
-      popper.js "^1.14.1"
-      prop-types "^15.6.1"
   
   react-router-dom@^4.2.2:
     version "4.3.1"
@@ -4825,15 +4797,6 @@ Lockfile:
       path-to-regexp "^1.7.0"
       prop-types "^15.6.1"
       warning "^4.0.1"
-  
-  react-scrollbar-size@^2.0.2:
-    version "2.1.0"
-    resolved "https://registry.yarnpkg.com/react-scrollbar-size/-/react-scrollbar-size-2.1.0.tgz#105e797135cab92b1f9e16f00071db7f29f80754"
-    dependencies:
-      babel-runtime "^6.26.0"
-      prop-types "^15.6.0"
-      react-event-listener "^0.5.1"
-      stifle "^1.0.2"
   
   react-transition-group@^2.2.1:
     version "2.5.3"
@@ -4920,20 +4883,11 @@ Lockfile:
     dependencies:
       resolve "^1.1.6"
   
-  recompose@^0.26.0:
-    version "0.26.0"
-    resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.26.0.tgz#9babff039cb72ba5bd17366d55d7232fbdfb2d30"
+  "recompose@0.28.0 - 0.30.0":
+    version "0.30.0"
+    resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.30.0.tgz#82773641b3927e8c7d24a0d87d65aeeba18aabd0"
     dependencies:
-      change-emitter "^0.1.2"
-      fbjs "^0.8.1"
-      hoist-non-react-statics "^2.3.1"
-      symbol-observable "^1.0.4"
-  
-  "recompose@^0.26.0 || ^0.27.0":
-    version "0.27.1"
-    resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.27.1.tgz#1a49e931f183634516633bbb4f4edbfd3f38a7ba"
-    dependencies:
-      babel-runtime "^6.26.0"
+      "@babel/runtime" "^7.0.0"
       change-emitter "^0.1.2"
       fbjs "^0.8.1"
       hoist-non-react-statics "^2.3.1"
@@ -4948,7 +4902,7 @@ Lockfile:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
   
-  regenerator-runtime@^0.11.0, regenerator-runtime@^0.11.1:
+  regenerator-runtime@^0.11.0:
     version "0.11.1"
     resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   
@@ -5191,12 +5145,6 @@ Lockfile:
   scoped-regex@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/scoped-regex/-/scoped-regex-1.0.0.tgz#a346bb1acd4207ae70bd7c0c7ca9e566b6baddb8"
-  
-  scroll@^2.0.3:
-    version "2.0.3"
-    resolved "https://registry.yarnpkg.com/scroll/-/scroll-2.0.3.tgz#0951b785544205fd17753bc3d294738ba16fc2ab"
-    dependencies:
-      rafl "~1.2.1"
   
   semver-diff@^2.0.0:
     version "2.1.0"
@@ -5442,10 +5390,6 @@ Lockfile:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
   
-  stifle@^1.0.2:
-    version "1.1.0"
-    resolved "https://registry.yarnpkg.com/stifle/-/stifle-1.1.0.tgz#1680b5de9de04074164f4ac0fe7d34db6b6f7229"
-  
   stream-browserify@^2.0.1:
     version "2.0.2"
     resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.2.tgz#87521d38a44aa7ee91ce1cd2a47df0cb49dd660b"
@@ -5620,15 +5564,6 @@ Lockfile:
   textextensions@^2.4.0:
     version "2.4.0"
     resolved "https://registry.yarnpkg.com/textextensions/-/textextensions-2.4.0.tgz#6a143a985464384cc2cff11aea448cd5b018e72b"
-  
-  theming@^1.3.0:
-    version "1.3.0"
-    resolved "https://registry.yarnpkg.com/theming/-/theming-1.3.0.tgz#286d5bae80be890d0adc645e5ca0498723725bdc"
-    dependencies:
-      brcast "^3.0.1"
-      is-function "^1.0.1"
-      is-plain-object "^2.0.1"
-      prop-types "^15.5.8"
   
   through2@^2.0.0:
     version "2.0.5"
@@ -6222,12 +6157,3 @@ Lockfile:
       text-table "^0.2.0"
       through2 "^2.0.0"
       yeoman-environment "^2.0.5"
-
-Trace: 
-  SyntaxError: D:\simple-social\package.json: Unexpected token } in JSON at position 1314
-      at JSON.parse (<anonymous>)
-      at D:\Buildagent\npm-cache\node_modules\yarn\lib\cli.js:1036:59
-      at Generator.next (<anonymous>)
-      at step (D:\Buildagent\npm-cache\node_modules\yarn\lib\cli.js:98:30)
-      at D:\Buildagent\npm-cache\node_modules\yarn\lib\cli.js:109:13
-      at <anonymous>
