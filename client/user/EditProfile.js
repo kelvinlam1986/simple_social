@@ -50,6 +50,7 @@ class EditProfile extends Component {
   constructor({ match }) {
     super();
     this.state = {
+      about: "",
       name: "",
       userId: "",
       email: "",
@@ -71,7 +72,8 @@ class EditProfile extends Component {
         this.setState({
           id: data._id,
           name: data.name,
-          email: data.email
+          email: data.email,
+          about: data.about
         });
       }
     });
@@ -82,7 +84,8 @@ class EditProfile extends Component {
     const user = {
       name: this.state.name || undefined,
       email: this.state.email || undefined,
-      password: this.state.password || undefined
+      password: this.state.password || undefined,
+      about: this.state.about || undefined
     };
 
     update({ userId: this.match.params.userId }, { t: jwt.token }, user).then(
@@ -116,6 +119,17 @@ class EditProfile extends Component {
             className={classes.textField}
             value={this.state.name}
             onChange={this.handleChange("name")}
+            margin="normal"
+          />{" "}
+          <br />
+          <TextField
+            id="multiline-flexible"
+            label="About"
+            multiline
+            rows="2"
+            value={this.state.about}
+            className={classes.textField}
+            onChange={this.handleChange("about")}
             margin="normal"
           />{" "}
           <br />
