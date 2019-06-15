@@ -1,0 +1,15 @@
+version: "2"
+services:
+  app:
+    container_name: mern-skeleton
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - "react-mongo"
+  react-mongo:
+    container_name: react-mongo
+    image: mongo
+    ports:
+      - "27017:27017"

@@ -46,7 +46,6 @@ const styles = theme => ({
     }
 });
 
-
 class EditProfile extends Component {
     constructor({match}) {
         super();
@@ -63,8 +62,8 @@ class EditProfile extends Component {
             error: ''
         }
 
-        this.match = match;
-    }
+    this.match = match;
+  }
 
     componentDidMount = () => {
         this.userData = new FormData();
@@ -78,7 +77,13 @@ class EditProfile extends Component {
                 }
             })
 
-    }
+  clickSubmit = () => {
+    const jwt = auth.isAuthenticated();
+    const user = {
+      name: this.state.name || undefined,
+      email: this.state.email || undefined,
+      password: this.state.password || undefined
+    };
 
     clickSubmit = () => {
         const jwt = auth.isAuthenticated();
@@ -88,6 +93,9 @@ class EditProfile extends Component {
             password: this.state.password || undefined,
             about: this.state.about || undefined
         }
+      }
+    );
+  };
 
         update({ userId: this.match.params.userId },
                { t: jwt.token}, this.userData).then((data) => {
@@ -99,8 +107,14 @@ class EditProfile extends Component {
                });
     }
 
-    clickCancel = () => {
-        this.setState({ redirectToUsers: true });
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
+
+  render() {
+    const { classes } = this.props;
+    if (this.state.redirectToProfile) {
+      return <Redirect to={"/user/" + this.state.userId} />;
     }
 
     handleChange = name => event => {
@@ -111,11 +125,70 @@ class EditProfile extends Component {
         this.setState({ [name]: value });
     }
 
-    render() {
-        const { classes } = this.props;
-        if (this.state.redirectToProfile) {
-            return (<Redirect to={'/user/' + this.state.userId } />)
-        }
+    return (
+      <Card className={classes.card}>
+        <CardHeader title="Edit Profile" />
+        <CardContent>
+          <TextField
+            id="name"
+            label="Name"
+            className={classes.textField}
+            value={this.state.name}
+            onChange={this.handleChange("name")}
+            margin="normal"
+          />{" "}
+          <br />
+          <TextField
+            id="email"
+            label="Email"
+            type="email"
+            className={classes.textField}
+            onChange={this.handleChange("email")}
+            value={this.state.email}
+            margin="normal"
+          />{" "}
+          <br />
+          <TextField
+            id="password"
+            label="Password"
+            type="password"
+            className={classes.textField}
+            onChange={this.handleChange("password")}
+            value={this.state.password}
+            margin="normal"
+          />{" "}
+          <br />
+          {this.state.error && (
+            <Typography component="p" color="error">
+              <Icon color="error" className={classes.error}>
+                error
+              </Icon>
+              {this.state.error}
+            </Typography>
+          )}
+        </CardContent>
+        <CardActions>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={this.clickSubmit}
+            className={classes.submit}
+          >
+            Submit
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={this.clickCancel}
+            className={classes.submit}
+          >
+            Cancel
+          </Button>
+        </CardActions>
+      </Card>
+    );
+  }
+}
 
         if (this.state.redirectToUsers) {
             return (<Redirect to={'/users' } />)
@@ -185,7 +258,7 @@ class EditProfile extends Component {
 };
 
 EditProfile.propTypes = {
-    classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(EditProfile);
