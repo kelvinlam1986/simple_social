@@ -12,7 +12,6 @@ import authRoutes from "./routes/auth.routes";
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
-console.log("NODE_ENV", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
   const devBundle = require("./devBundle");
   devBundle.default.compile(app);
