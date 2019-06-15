@@ -51,10 +51,7 @@ class EditProfile extends Component {
     super();
     this.state = {
       name: "",
-      about: "",
-      photo: "",
       userId: "",
-      name: "",
       email: "",
       password: "",
       redirectToProfile: false,
@@ -66,7 +63,6 @@ class EditProfile extends Component {
   }
 
   componentDidMount = () => {
-    this.userData = new FormData();
     const jwt = auth.isAuthenticated();
     read({ userId: this.match.params.userId }, { t: jwt.token }).then(data => {
       if (data.error) {
@@ -75,8 +71,7 @@ class EditProfile extends Component {
         this.setState({
           id: data._id,
           name: data.name,
-          email: data.email,
-          about: data.about
+          email: data.email
         });
       }
     });
@@ -90,17 +85,15 @@ class EditProfile extends Component {
       password: this.state.password || undefined
     };
 
-    update(
-      { userId: this.match.params.userId },
-      { t: jwt.token },
-      this.userData
-    ).then(data => {
-      if (data.error) {
-        this.setState({ error: data.error });
-      } else {
-        this.setState({ userId: data._id, redirectToProfile: true });
+    update({ userId: this.match.params.userId }, { t: jwt.token }, user).then(
+      data => {
+        if (data.error) {
+          this.setState({ error: data.error });
+        } else {
+          this.setState({ userId: data._id, redirectToProfile: true });
+        }
       }
-    });
+    );
   };
 
   handleChange = name => event => {
@@ -112,13 +105,6 @@ class EditProfile extends Component {
     if (this.state.redirectToProfile) {
       return <Redirect to={"/user/" + this.state.userId} />;
     }
-
-    handleChange = name => event => {
-      const value =
-        name === "photo" ? event.target.files[0] : event.target.value;
-      this.userData.set(name, value);
-      this.setState({ [name]: value });
-    };
 
     return (
       <Card className={classes.card}>
@@ -170,14 +156,6 @@ class EditProfile extends Component {
             className={classes.submit}
           >
             Submit
-          </Button>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={this.clickCancel}
-            className={classes.submit}
-          >
-            Cancel
           </Button>
         </CardActions>
       </Card>
