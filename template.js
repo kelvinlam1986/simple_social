@@ -1,6 +1,5 @@
-export default ({markup, css}) => {
-    console.log('markup', markup);
-    return `
+export default () => {
+  return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -17,10 +16,9 @@ export default ({markup, css}) => {
         </style>
     </head>
     <body>
-        <div id="root">${markup}</div>
-        <style id="jss-server-side">${css}</style>
+        <div id="root"></div>
         <script type="text/javascript" src="/dist/bundle.js"></script>
     </body>
     </html>
     `;
-}
+};
