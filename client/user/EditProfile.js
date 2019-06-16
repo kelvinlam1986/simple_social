@@ -121,7 +121,6 @@ class EditProfile extends Component {
     const photoUrl = this.state.id
       ? `/api/users/photo/${this.state.id}?${new Date().getTime()}`
       : defaultPhoto;
-    console.log("photoUrl", photoUrl);
     if (this.state.redirectToProfile) {
       return <Redirect to={"/user/" + this.state.id} />;
     }

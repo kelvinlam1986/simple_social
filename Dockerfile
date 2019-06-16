@@ -11,6 +11,8 @@ COPY nodemon.json ./
 COPY client client
 COPY server server
 COPY config config
+COPY client/assets/images/favicon.ico client/assets/images/favicon.ico
+
 RUN npm install
 ENV NODE_ENV production
 RUN npm run build
