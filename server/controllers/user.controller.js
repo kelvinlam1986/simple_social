@@ -105,7 +105,6 @@ const photo = (req, res, next) => {
 };
 
 const defaultPhoto = (req, res) => {
-  console.log("we are here");
   return res.sendFile(process.cwd() + profileImage);
 };
 
