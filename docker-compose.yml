@@ -7,9 +7,9 @@ services:
     ports:
       - "3000:3000"
     links:
-      - "react-mongo"
-  react-mongo:
-    container_name: react-mongo
+      - "mongo"
+  mongo:
+    container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
