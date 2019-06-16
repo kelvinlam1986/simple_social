@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 /* configure express */
-app.use(express.json()).use(express.urlencoded());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(compress());
