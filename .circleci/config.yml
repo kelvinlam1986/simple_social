@@ -1,12 +1,16 @@
-# Use the latest 2.1 version of CircleCI pipeline processing engine, see https://circleci.com/docs/2.0/configuration-reference/
-version: 2.1
+version: 2
 jobs:
- build:
-  docker:
-	 - image: circleci/node:10
-	steps:
-	 - checkout
-	 - setup_remote_docker:
-	  docker_layer_caching: true
-	 - run:
-	command: echo "This is working"
+  build:
+    docker:
+      - image: circleci/node:10
+      # - image: tkuchiki/delayed-mysql
+      #   environment:
+      #     MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      #     MYSQL_ROOT_PASSWORD: ''
+      #     MYSQL_DATABASE: graphbook_test
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          command: echo "This is working"
