@@ -114,4 +114,21 @@ const unfollow = (params, credentials, unfollowId) => {
     });
 };
 
-export { create, list, read, update, remove, follow, unfollow };
+const findPeople = (params, credentials) => {
+  return fetch("/api/users/findpeople/" + params.userId, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + credentials.t
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+export { create, list, read, update, remove, follow, unfollow, findPeople };

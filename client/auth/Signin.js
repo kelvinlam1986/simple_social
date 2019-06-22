@@ -15,12 +15,15 @@ import auth from "./auth-helper";
 const styles = theme => ({
   title: {
     marginTop: theme.spacing.unit * 2,
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    fontSize: "2em"
   },
   card: {
     maxWidth: 600,
     margin: "auto",
-    marginTop: theme.spacing.unit * 5
+    textAlign: "center",
+    marginTop: theme.spacing.unit * 5,
+    paddingBottom: theme.spacing.unit * 2
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -83,8 +86,10 @@ class SignIn extends Component {
 
     return (
       <Card className={classes.card}>
-        <CardHeader title="Đăng nhập" />
         <CardContent>
+          <Typography type="headline" component="h1" className={classes.title}>
+            Đăng nhập
+          </Typography>
           <TextField
             id="email"
             label="Email của bạn"

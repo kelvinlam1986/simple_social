@@ -27,7 +27,8 @@ const styles = theme => ({
   },
   title: {
     marginTop: theme.spacing.unit * 2,
-    color: theme.palette.text.secondary
+    color: theme.palette.openTitle,
+    fontSize: "2em"
   },
   error: {
     verticalAlign: "middle"
@@ -75,8 +76,14 @@ class SignUp extends Component {
     return (
       <div>
         <Card className={classes.card}>
-          <CardHeader title="Sign Up" />
           <CardContent>
+            <Typography
+              type="headline"
+              component="h2"
+              className={classes.title}
+            >
+              Đăng ký
+            </Typography>
             <TextField
               id="name"
               label="Tên dễ thương của bạn"
