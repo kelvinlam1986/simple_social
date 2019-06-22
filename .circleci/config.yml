@@ -20,7 +20,7 @@ jobs:
           command: docker login --username=$H_LOGIN --password=$H_API_KEY registry.heroku.com
       - run:
           name: "Build Docker Image"
-          command: docker build build -t registry.heroku.com/minh-social/web .
+          command: docker build -t registry.heroku.com/minh-social/web .
       - run:
           name: "Push Docker Image To Heroku registry"
           command: docker push registry.heroku.com/minh-social/web:latest
