@@ -3,14 +3,27 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
-      # - image: tkuchiki/delayed-mysql
-      #   environment:
-      #     MYSQL_ALLOW_EMPTY_PASSWORD: yes
-      #     MYSQL_ROOT_PASSWORD: ''
-      #     MYSQL_DATABASE: graphbook_test
+      - image: mongo
+
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          command: echo "This is working"
+          name: "Install dependencies"
+          command: npm install
+      - run:
+          name: "Install Heroku CLI"
+          command: curl https://cli-assets.heroku.com/install.sh | sh
+      - run:
+          name: "Login to Docker"
+          command: docker login -u kelvinlam_1986@yahoo.com.vn -p 10101986x@X registry.heroku.com
+      - run:
+          name: "Build Docker Image"
+          command: docker build build -t registry.heroku.com/minh-social/web .
+      - run:
+          name: "Push Docker Image To Heroku registry"
+          command: docker push registry.heroku.com/minh-social/web:latest
+      - run:
+          name: "Deploy image to Heroku app"
+          command: heroku container:release web --app minh-social
