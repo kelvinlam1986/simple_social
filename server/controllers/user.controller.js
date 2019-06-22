@@ -111,7 +111,7 @@ const defaultPhoto = (req, res) => {
 const addFollowing = (req, res, next) => {
   User.findByIdAndUpdate(
     req.body.userId,
-    { $push: { following: req.body.followingId } },
+    { $push: { following: req.body.followId } },
     (err, result) => {
       if (err) {
         return res.status(400).json({
@@ -126,7 +126,7 @@ const addFollowing = (req, res, next) => {
 
 const addFollower = (req, res) => {
   User.findByIdAndUpdate(
-    req.body.followingId,
+    req.body.followId,
     { $push: { followers: req.body.userId } },
     { new: true }
   )

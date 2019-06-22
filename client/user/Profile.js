@@ -18,6 +18,7 @@ import auth from "../auth/auth-helper";
 import { read } from "../user/api-user";
 import DeleteUser from "./DeleteUser";
 import FollowProfileButton from "./FollowProfileButton";
+import defaultPhoto from "../assets/images/profile-pic.png";
 import _ from "lodash";
 
 const styles = theme => ({
@@ -41,7 +42,12 @@ const styles = theme => ({
 class Profile extends Component {
   constructor({ match }) {
     super();
-    this.state = { user: null, redirectToSignIn: false, following: false };
+    this.state = {
+      user: { _id: 0, following: [], followers: [] },
+      redirectToSignIn: false,
+      following: false,
+      error: null
+    };
     this.match = match;
   }
 
@@ -58,19 +64,34 @@ class Profile extends Component {
   };
 
   checkFollow = user => {
-    const jwt = auth.isAuthenticated();
     if (_.isEmpty(user.followers)) {
       return false;
     }
-
+    const jwt = auth.isAuthenticated();
     const match = user.followers.find(follower => {
       return follower._id == jwt.user._id;
     });
-
     return match;
   };
 
-  clickFollowButton = callApi => {};
+  clickFollowButton = callApi => {
+    const jwt = auth.isAuthenticated();
+    callApi(
+      {
+        userId: jwt.user._id
+      },
+      {
+        t: jwt.token
+      },
+      this.state.user._id
+    ).then(data => {
+      if (data.error) {
+        this.setState({ error: data.error });
+      } else {
+        this.setState({ user: data, following: !this.state.following });
+      }
+    });
+  };
 
   componentDidMount = () => {
     this.init(this.match.params.userId);
@@ -82,9 +103,10 @@ class Profile extends Component {
 
   render() {
     const { classes } = this.props;
-    const photoUrl = this.state.user
-      ? `/api/users/photo/${this.state.user._id}?${new Date().getTime()}`
-      : "/api/users/defaultPhoto";
+    const photoUrl =
+      this.state.user._id !== 0
+        ? `/api/users/photo/${this.state.user._id}?${new Date().getTime()}`
+        : defaultPhoto;
     const redirectToSignIn = this.state.redirectToSignIn;
     if (redirectToSignIn) {
       return <Redirect to="/signin" />;

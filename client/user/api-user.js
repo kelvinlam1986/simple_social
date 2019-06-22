@@ -45,7 +45,6 @@ const read = (params, credentials) => {
 };
 
 const update = (params, credentials, user) => {
-  console.log("user", user);
   return fetch("/api/users/" + params.userId, {
     method: "PUT",
     headers: {
