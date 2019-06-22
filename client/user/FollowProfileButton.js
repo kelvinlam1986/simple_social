@@ -22,7 +22,7 @@ class FollowProfileButton extends Component {
             color="secondary"
             onClick={this.unFollowClick}
           >
-            Unfollow
+            Chia tay
           </Button>
         ) : (
           <Button

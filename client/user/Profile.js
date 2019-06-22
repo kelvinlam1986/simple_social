@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Redirect, Link } from "react-router-dom";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
@@ -20,6 +20,7 @@ import DeleteUser from "./DeleteUser";
 import FollowProfileButton from "./FollowProfileButton";
 import defaultPhoto from "../assets/images/profile-pic.png";
 import _ from "lodash";
+import ProfileTab from "./ProfileTab";
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -29,8 +30,9 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 5
   }),
   title: {
-    margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 2}px`,
-    color: theme.palette.protectedTitle
+    margin: `${theme.spacing.unit * 2}px ${theme.spacing.unit}px 0`,
+    color: theme.palette.protectedTitle,
+    fontSize: "1em"
   },
   bigAvatar: {
     width: 60,
@@ -115,7 +117,7 @@ class Profile extends Component {
     return (
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
-          Profile
+          Thông tin cá nhân
         </Typography>
         {this.state.user ? (
           <List dense>
@@ -150,16 +152,24 @@ class Profile extends Component {
 
             <ListItem>
               <ListItemText
-                primary={
-                  "Joined: " + new Date(this.state.user.created).toDateString()
+                primary={this.state.user.about}
+                secondary={
+                  "Tham gia: " +
+                  new Date(this.state.user.created).toLocaleDateString(
+                    "vi-VN",
+                    {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric"
+                    }
+                  )
                 }
               />
             </ListItem>
-            <ListItem>
-              <ListItemText primary={this.state.user.about} />
-            </ListItem>
           </List>
         ) : null}
+        <ProfileTab user={this.state.user} />
       </Paper>
     );
   }

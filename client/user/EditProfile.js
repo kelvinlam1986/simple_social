@@ -127,7 +127,7 @@ class EditProfile extends Component {
 
     return (
       <Card className={classes.card}>
-        <CardHeader title="Edit Profile" />
+        <CardHeader title="Thông tin của bạn" />
         <Avatar src={photoUrl} className={classes.bigAvatar} />
         <br />
         <input
@@ -148,7 +148,7 @@ class EditProfile extends Component {
         <CardContent>
           <TextField
             id="name"
-            label="Name"
+            label="Tên của bạn"
             className={classes.textField}
             value={this.state.name}
             onChange={this.handleChange("name")}
@@ -157,7 +157,7 @@ class EditProfile extends Component {
           <br />
           <TextField
             id="multiline-flexible"
-            label="About"
+            label="Bạn thấy thế nào ?"
             multiline
             rows="2"
             value={this.state.about}
@@ -168,7 +168,7 @@ class EditProfile extends Component {
           <br />
           <TextField
             id="email"
-            label="Email"
+            label="Email của bạn"
             type="email"
             className={classes.textField}
             onChange={this.handleChange("email")}
@@ -178,7 +178,7 @@ class EditProfile extends Component {
           <br />
           <TextField
             id="password"
-            label="Password"
+            label="Password của bạn"
             type="password"
             className={classes.textField}
             onChange={this.handleChange("password")}
@@ -202,7 +202,7 @@ class EditProfile extends Component {
             onClick={this.clickSubmit}
             className={classes.submit}
           >
-            Submit
+            Cập nhật
           </Button>
         </CardActions>
       </Card>

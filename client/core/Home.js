@@ -66,7 +66,7 @@ class Home extends Component {
                 component="h2"
                 className={classes.title}
               >
-                Home Page
+                Bạn Minh Social
               </Typography>
               <CardMedia
                 className={classes.media}
@@ -75,7 +75,7 @@ class Home extends Component {
               />
               <CardContent>
                 <Typography type="body1" component="p">
-                  Welcome to the MINH Social home page.
+                  Chào mừng bạn đến với mạng xã hội Bạn Minh
                 </Typography>
               </CardContent>
             </Grid>

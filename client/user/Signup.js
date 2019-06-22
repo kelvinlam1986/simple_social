@@ -79,7 +79,7 @@ class SignUp extends Component {
           <CardContent>
             <TextField
               id="name"
-              label="Name"
+              label="Tên dễ thương của bạn"
               className={classes.textField}
               value={this.state.name}
               onChange={this.handleChange("name")}
@@ -88,7 +88,7 @@ class SignUp extends Component {
             <br />
             <TextField
               id="email"
-              label="Email"
+              label="Email của bạn"
               type="email"
               className={classes.textField}
               onChange={this.handleChange("email")}
@@ -98,7 +98,7 @@ class SignUp extends Component {
             <br />
             <TextField
               id="password"
-              label="Password"
+              label="Password của bạn"
               type="password"
               className={classes.textField}
               onChange={this.handleChange("password")}
@@ -122,7 +122,7 @@ class SignUp extends Component {
               onClick={this.clickSubmit}
               className={classes.submit}
             >
-              Submit
+              Đăng ký
             </Button>
           </CardActions>
         </Card>

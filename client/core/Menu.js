@@ -20,7 +20,7 @@ const Menu = withRouter(({ history }) => (
   <AppBar position="static">
     <Toolbar>
       <Typography type="title" color="inherit">
-        MINH Social
+        Bạn Minh Social
       </Typography>
       <Link to="/">
         <IconButton>
@@ -28,15 +28,15 @@ const Menu = withRouter(({ history }) => (
         </IconButton>
       </Link>
       <Link to="/users">
-        <Button style={isActive(history, "/users")}>Users</Button>
+        <Button style={isActive(history, "/users")}>Tìm bạn</Button>
       </Link>
       {!auth.isAuthenticated() && (
         <span>
           <Link to="/signup">
-            <Button style={isActive(history, "/signup")}>Sign Up</Button>
+            <Button style={isActive(history, "/signup")}>Đăng ký</Button>
           </Link>
           <Link to="/signin">
-            <Button style={isActive(history, "/signin")}>Sign In</Button>
+            <Button style={isActive(history, "/signin")}>Đăng nhập</Button>
           </Link>
         </span>
       )}
@@ -49,7 +49,7 @@ const Menu = withRouter(({ history }) => (
                 "/user/" + auth.isAuthenticated().user._id
               )}
             >
-              My Profile
+              Thông tin cá nhân
             </Button>
           </Link>
           <Button
@@ -58,7 +58,7 @@ const Menu = withRouter(({ history }) => (
               auth.signout(() => history.push("/"));
             }}
           >
-            Sign Out
+            Đăng xuất
           </Button>
         </span>
       )}
