@@ -17,7 +17,7 @@ jobs:
           command: curl https://cli-assets.heroku.com/install.sh | sh
       - run:
           name: "Login to Docker"
-          command: docker login -u kelvinlam_1986@yahoo.com.vn --password-stdin 10101986x@X registry.heroku.com
+          command: docker login -u $HEROKU_LOGIN --p $HEROKU_API_KEY registry.heroku.com
       - run:
           name: "Build Docker Image"
           command: docker build build -t registry.heroku.com/minh-social/web .
