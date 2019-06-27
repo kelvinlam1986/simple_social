@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { IconButton, Icon, Hidden } from "@material-ui/core";
+import { Add } from "@material-ui/icons";
 import { follow, unfollow } from "./api-user";
 
 class FollowProfileButton extends Component {
@@ -17,21 +18,43 @@ class FollowProfileButton extends Component {
     return (
       <div>
         {this.props.following ? (
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={this.unFollowClick}
-          >
-            Chia tay
-          </Button>
+          <React.Fragment>
+            <Hidden smDown>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={this.unFollowClick}
+              >
+                Chia tay
+              </Button>
+            </Hidden>
+            <Hidden smUp>
+              
+            </Hidden>
+          </React.Fragment>
         ) : (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={this.followClick}
-          >
-            Follow
-          </Button>
+          <React.Fragment>
+            <Hidden smDown>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.followClick}
+              >
+                Follow
+              </Button>
+            </Hidden>
+            <Hidden smUp>
+              <IconButton
+                variant="contained"
+                color="primary"
+                onClick={this.followClick}
+              >
+                <Icon>
+                  <Add />
+                </Icon>
+              </IconButton>
+            </Hidden>
+          </React.Fragment>
         )}
       </div>
     );

@@ -9,9 +9,9 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import Person from "@material-ui/icons/Person";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
+import { Hidden } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import Edit from "@material-ui/icons/Edit";
 import auth from "../auth/auth-helper";
@@ -38,6 +38,10 @@ const styles = theme => ({
     width: 60,
     height: 60,
     margin: 10
+  },
+  smallAvatar: {
+    width: 30,
+    height: 30
   }
 });
 
@@ -122,9 +126,16 @@ class Profile extends Component {
         {this.state.user ? (
           <List dense>
             <ListItem>
-              <ListItemAvatar>
-                <Avatar src={photoUrl} className={classes.bigAvatar} />
-              </ListItemAvatar>
+              <Hidden smDown>
+                <ListItemAvatar>
+                  <Avatar src={photoUrl} className={classes.bigAvatar} />
+                </ListItemAvatar>
+              </Hidden>
+              <Hidden smUp>
+                <ListItemAvatar>
+                  <Avatar src={photoUrl} className={classes.smallAvatar} />
+                </ListItemAvatar>
+              </Hidden>
               <ListItemText
                 primary={this.state.user.name}
                 secondary={this.state.user.email}
@@ -142,10 +153,12 @@ class Profile extends Component {
                   )}
                 </ListItemSecondaryAction>
               ) : (
-                <FollowProfileButton
-                  following={this.state.following}
-                  onButtonClick={this.clickFollowButton}
-                />
+                <ListItemSecondaryAction>
+                  <FollowProfileButton
+                    following={this.state.following}
+                    onButtonClick={this.clickFollowButton}
+                  />
+                </ListItemSecondaryAction>
               )}
             </ListItem>
             <Divider />

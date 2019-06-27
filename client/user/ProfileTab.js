@@ -25,7 +25,7 @@ class ProfileTab extends Component {
             variant="fullWidth"
           >
             <Tab label="Đang follow" />
-            <Tab label="Người follow bạn" />
+                    <Tab label="Người follow bạn" />
           </Tabs>
         </AppBar>
         {this.state.tab === 0 && (

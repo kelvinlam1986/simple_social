@@ -15,6 +15,7 @@ import { FileCopy } from "@material-ui/icons";
 import auth from "../auth/auth-helper";
 import { read, update } from "./api-user";
 import defaultPhoto from "../assets/images/profile-pic.png";
+import { CircularProgress } from "@material-ui/core";
 
 const styles = theme => ({
   card: {
@@ -50,6 +51,14 @@ const styles = theme => ({
     width: 60,
     height: 60,
     margin: "auto"
+  },
+  buttonProgress: {
+    color: theme.palette.text.secondary,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12
   }
 });
 
@@ -65,7 +74,8 @@ class EditProfile extends Component {
       redirectToProfile: false,
       redirectToUsers: false,
       error: "",
-      id: ""
+      id: "",
+      loading: false
     };
 
     this.match = match;
@@ -96,7 +106,7 @@ class EditProfile extends Component {
       password: this.state.password || undefined,
       about: this.state.about || undefined
     };
-
+    this.setState({ loading: true });
     update(
       { userId: this.match.params.userId },
       { t: jwt.token },
@@ -107,6 +117,7 @@ class EditProfile extends Component {
       } else {
         this.setState({ id: data._id, redirectToProfile: true });
       }
+      this.setState({ loading: false });
     });
   };
 
@@ -204,6 +215,9 @@ class EditProfile extends Component {
           >
             Cập nhật
           </Button>
+          {this.state.loading && (
+            <CircularProgress className={classes.buttonProgress} />
+          )}
         </CardActions>
       </Card>
     );

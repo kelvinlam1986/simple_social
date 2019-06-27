@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   Paper,
@@ -12,10 +13,11 @@ import {
   IconButton,
   Button,
   Snackbar,
-  withStyles
+  withStyles,
+  Hidden
 } from "@material-ui/core";
 
-import { Search } from "@material-ui/icons";
+import { Search, Favorite } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import auth from "../auth/auth-helper";
 import { findPeople, follow } from "../user/api-user";
@@ -94,6 +96,7 @@ class FindPeople extends Component {
           open: true,
           followMessage: `Following ${user.name}!`
         });
+        this.props.updateAfterFollowState(true);
       }
     });
   };
@@ -110,33 +113,42 @@ class FindPeople extends Component {
           <Typography type="title" className={classes.title}>
             Bạn muốn Follow ai nè
           </Typography>
-          <List>
+          <List dense>
             {this.state.users.map((item, i) => {
               return (
                 <span key={i}>
                   <ListItem>
-                    <ListItemAvatar className={classes.avatar}>
-                      <Avatar src={"/api/users/photo/" + item._id} />
-                    </ListItemAvatar>
+                    <Hidden smDown>
+                      <ListItemAvatar className={classes.avatar}>
+                        <Avatar src={"/api/users/photo/" + item._id} />
+                      </ListItemAvatar>
+                    </Hidden>
                     <ListItemText primary={item.name} />
                     <ListItemSecondaryAction className={classes.follow}>
-                      <Link to={"/user/" + item._id}>
-                        <IconButton
-                          variant="contained"
-                          color="secondary"
-                          className={classes.viewButton}
-                        >
+                      <Link to={"/user/" + item._id} style={{ float: "right" }}>
+                        <IconButton variant="contained" color="secondary">
                           <Search />
                         </IconButton>
                       </Link>
-                      <Button
-                        aria-label="Follow"
-                        variant="contained"
-                        color="primary"
-                        onClick={this.clickFollow.bind(this, item, i)}
-                      >
-                        Follow
-                      </Button>
+                      <Hidden smUp>
+                        <IconButton
+                          variant="contained"
+                          color="primary"
+                          onClick={this.clickFollow.bind(this, item, i)}
+                        >
+                          <Favorite />
+                        </IconButton>
+                      </Hidden>
+                      <Hidden smDown>
+                        <Button
+                          aria-label="Follow"
+                          variant="contained"
+                          color="primary"
+                          onClick={this.clickFollow.bind(this, item, i)}
+                        >
+                          Follow
+                        </Button>
+                      </Hidden>
                     </ListItemSecondaryAction>
                   </ListItem>
                 </span>
@@ -165,4 +177,4 @@ FindPeople.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(FindPeople);
+export default withRouter(withStyles(styles)(FindPeople));

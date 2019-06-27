@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
+import { CircularProgress } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Icon from "@material-ui/core/Icon";
@@ -36,6 +36,14 @@ const styles = theme => ({
   submit: {
     margin: "auto",
     marginBottom: theme.spacing.unit * 2
+  },
+  buttonProgress: {
+    color: theme.palette.text.secondary,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12
   }
 });
 
@@ -46,7 +54,8 @@ class SignIn extends Component {
       email: "",
       password: "",
       error: "",
-      redirectToReferer: false
+      redirectToReferer: false,
+      loading: false
     };
   }
 
@@ -55,8 +64,9 @@ class SignIn extends Component {
       email: this.state.email || undefined,
       password: this.state.password || undefined
     };
-
+    this.setState({ loading: true });
     signin(user).then(data => {
+      this.setState({ loading: false });
       if (data.error) {
         this.setState({ error: data.error });
       } else {
@@ -128,6 +138,9 @@ class SignIn extends Component {
           >
             Đăng nhập
           </Button>
+          {this.state.loading && (
+            <CircularProgress size={24} className={classes.buttonProgress} />
+          )}
         </CardActions>
       </Card>
     );

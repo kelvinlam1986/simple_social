@@ -10,7 +10,7 @@ import seashellImg from "./../assets/images/seashell.jpg";
 import auth from "../auth/auth-helper";
 import FindPeople from "../user/FindPeople";
 import { Grid } from "@material-ui/core";
-import MySnackbarContent from "../core/MyStackBarContent";
+import Newsfeed from "../post/Newsfeed";
 
 const styles = theme => ({
   root: {
@@ -35,7 +35,7 @@ const styles = theme => ({
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { defaultPage: true };
+    this.state = { defaultPage: true, afterFollow: false };
   }
 
   init = () => {
@@ -52,6 +52,10 @@ class Home extends Component {
 
   componentDidMount = () => {
     this.init();
+  };
+
+  updateAfterFollowState = isUpdating => {
+    this.setState({ afterFollow: isUpdating });
   };
 
   render() {
@@ -84,11 +88,16 @@ class Home extends Component {
         )}
         {!defaultPage && (
           <Grid container spacing={24}>
-            <Grid item xs={8} sm={7}>
-              Cập nhật status thôi
+            <Grid item xs={12} sm={7}>
+              <Newsfeed
+                afterFollow={this.state.afterFollow}
+                updateAfterFollowState={this.updateAfterFollowState}
+              />
             </Grid>
-            <Grid item xs={6} sm={5}>
-              <FindPeople />
+            <Grid item xs={12} sm={5}>
+              <FindPeople
+                updateAfterFollowState={this.updateAfterFollowState}
+              />
             </Grid>
           </Grid>
         )}

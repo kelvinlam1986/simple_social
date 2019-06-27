@@ -134,16 +134,16 @@ class SignUp extends Component {
           </CardActions>
         </Card>
         <Dialog open={this.state.open} disableBackdropClick={true}>
-          <DialogTitle>New Account</DialogTitle>
+          <DialogTitle>Tạo tài khoản</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              New account successfully created.
+              Tài khoản đăng ký thành công !
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Link to="/signin">
               <Button color="primary" autoFocus="autoFocus" variant="contained">
-                Sign In
+                Đăng nhập
               </Button>
             </Link>
           </DialogActions>
