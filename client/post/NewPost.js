@@ -11,7 +11,8 @@ import {
   Icon,
   CardActions,
   Button,
-  withStyles
+  withStyles,
+  CircularProgress
 } from "@material-ui/core";
 import { PhotoCamera } from "@material-ui/icons";
 import defaultPhoto from "../assets/images/profile-pic.png";
@@ -56,6 +57,9 @@ const styles = theme => ({
   },
   filename: {
     verticalAlign: "super"
+  },
+  buttonProgress: {
+    color: theme.palette.text.secondary
   }
 });
 
@@ -66,7 +70,8 @@ class NewPost extends Component {
       text: "",
       photo: "",
       error: "",
-      user: {}
+      user: {},
+      isLoading: false
     };
   }
 
@@ -83,6 +88,7 @@ class NewPost extends Component {
 
   clickPost = () => {
     const jwt = auth.isAuthenticated();
+    this.setState({ isLoading: true });
     create(
       {
         userId: jwt.user._id
@@ -93,9 +99,9 @@ class NewPost extends Component {
       this.postData
     ).then(data => {
       if (data.error) {
-        this.setState({ error: data.error });
+        this.setState({ error: data.error, isLoading: false });
       } else {
-        this.setState({ text: "", photo: "" });
+        this.setState({ text: "", photo: "", isLoading: false });
         this.props.addUpdate(data);
       }
     });
@@ -156,12 +162,15 @@ class NewPost extends Component {
             <Button
               color="primary"
               variant="contained"
-              disabled={this.state.text === ""}
+              disabled={this.state.text === "" || this.state.isLoading}
               className={classes.submit}
               onClick={this.clickPost}
             >
               Đăng
             </Button>
+            {this.state.isLoading && (
+              <CircularProgress className={classes.buttonProgress} />
+            )}
           </CardActions>
         </Card>
       </div>

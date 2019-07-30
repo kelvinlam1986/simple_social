@@ -37,7 +37,7 @@ const userByID = (req, res, next, id) => {
     .exec((err, user) => {
       if (err || !user) {
         return res.status(400).json({
-          error: "User not found"
+          error: "Không tìm thấy tài khoản."
         });
       }
 

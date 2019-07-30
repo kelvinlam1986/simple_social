@@ -11,13 +11,13 @@ const signin = (req, res) => {
     (err, user) => {
       if (err || !user) {
         return res.status("401").json({
-          error: "User not found"
+          error: "Không tìm thấy tài khoản."
         });
       }
 
       if (!user.authenticate(req.body.password)) {
         return res.status("401").send({
-          error: "Email and password not match."
+          error: "Email và password không đúng."
         });
       }
 

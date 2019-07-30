@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, Typography, Divider, withStyles } from "@material-ui/core";
+import {
+  Card,
+  Typography,
+  Divider,
+  CircularProgress,
+  withStyles
+} from "@material-ui/core";
 import NewPost from "./NewPost";
 import PostList from "./PostList";
 import auth from "../auth/auth-helper";
@@ -20,13 +26,16 @@ const styles = theme => ({
   },
   media: {
     minHeight: 330
+  },
+  buttonProgress: {
+    color: theme.palette.text.secondary
   }
 });
 
 class Newsfeed extends Component {
   constructor(props) {
     super(props);
-    this.state = { posts: [] };
+    this.state = { posts: [], isLoading: false };
   }
 
   componentDidMount = () => {
@@ -41,11 +50,16 @@ class Newsfeed extends Component {
 
   loadPosts = () => {
     const jwt = auth.isAuthenticated();
+    this.setState({ isLoading: true });
     listNewsFeed({ userId: jwt.user._id }, { t: jwt.token }).then(data => {
       if (data.error) {
         console.log(data.error);
+        this.setState({ isLoading: false });
       } else {
-        this.setState({ posts: data });
+        setTimeout(
+          () => this.setState({ posts: data, isLoading: false }),
+          3000
+        );
       }
       this.props.updateAfterFollowState(false);
     });
@@ -68,12 +82,16 @@ class Newsfeed extends Component {
     const { classes } = this.props;
     return (
       <Card className={classes.card}>
+        {this.state.isLoading && (
+          <CircularProgress className={classes.buttonProgress} />
+        )}
         <Typography type="title" className={classes.title}>
           Tin mới cập nhật
         </Typography>
         <Divider />
         <NewPost addUpdate={this.addPost} />
         <Divider />
+
         <PostList removeUpdate={this.removePost} posts={this.state.posts} />
       </Card>
     );

@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 const create = (params, credential, post) => {
   return fetch("/api/posts/new/" + params.userId, {
     method: "POST",
