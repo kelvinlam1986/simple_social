@@ -19,6 +19,7 @@ import { read } from "../user/api-user";
 import DeleteUser from "./DeleteUser";
 import FollowProfileButton from "./FollowProfileButton";
 import _ from "lodash";
+import { AccountCircle } from "@material-ui/icons";
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -99,7 +100,9 @@ class Profile extends Component {
           <List dense>
             <ListItem>
               <ListItemAvatar>
-                <Avatar src={photoUrl} className={classes.bigAvatar} />
+                <Avatar>
+                  <AccountCircle></AccountCircle>
+                </Avatar>
               </ListItemAvatar>
               <ListItemText
                 primary={this.state.user.name}

@@ -1,6 +1,6 @@
 const config = {
   env: process.env.NODE_ENV || "development",
-  port: process.env.PORT || process.env.NODE_PORT || 3000,
+  port: process.env.PORT || process.env.NODE_PORT || 4001,
   jwtSecret: process.env.JWT_SECRET || "kelvinlam1986",
   mongoUri:
     process.env.MONGODB_URI ||
@@ -9,7 +9,7 @@ const config = {
       (process.env.IP || "localhost") +
       ":" +
       (process.env.MONGO_PORT || "27017") +
-      "/mernproject"
+      "/mern_marketplace"
 };
 
 //mongodb + srv://admin:<password>@cluster0-jla9f.mongodb.net/test?retryWrites=true&w=majority

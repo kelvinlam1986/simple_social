@@ -75,7 +75,7 @@ class Home extends Component {
               />
               <CardContent>
                 <Typography type="body1" component="p">
-                  Welcome to the MINH Social home page.
+                  Welcome to the MINH Martket Place home page.
                 </Typography>
               </CardContent>
             </Grid>

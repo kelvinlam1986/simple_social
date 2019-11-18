@@ -10,11 +10,10 @@ import Icon from "@material-ui/core/Icon";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import CardHeader from "@material-ui/core/CardHeader";
-import Avatar from "@material-ui/core/Avatar";
-import { FileCopy } from "@material-ui/icons";
 import auth from "../auth/auth-helper";
 import { read, update } from "./api-user";
 import defaultPhoto from "../assets/images/profile-pic.png";
+import { FormControlLabel, Switch } from "@material-ui/core";
 
 const styles = theme => ({
   card: {
@@ -50,6 +49,10 @@ const styles = theme => ({
     width: 60,
     height: 60,
     margin: "auto"
+  },
+  subheading: {
+    marginTop: theme.spacing.unit * 2,
+    color: theme.palette.openTitle
   }
 });
 
@@ -57,14 +60,12 @@ class EditProfile extends Component {
   constructor({ match }) {
     super();
     this.state = {
-      photo: "",
-      about: "",
       name: "",
       email: "",
       password: "",
       redirectToProfile: false,
-      redirectToUsers: false,
       error: "",
+      seller: false,
       id: ""
     };
 
@@ -72,17 +73,20 @@ class EditProfile extends Component {
   }
 
   componentDidMount = () => {
-    this.userData = new FormData();
     const jwt = auth.isAuthenticated();
-    read({ userId: this.match.params.userId }, { t: jwt.token }).then(data => {
+    read(
+      {
+        userId: this.match.params.userId
+      },
+      { t: jwt.token }
+    ).then(data => {
       if (data.error) {
         this.setState({ error: data.error });
       } else {
         this.setState({
-          id: data._id,
           name: data.name,
           email: data.email,
-          about: data.about
+          seller: data.seller
         });
       }
     });
@@ -94,26 +98,28 @@ class EditProfile extends Component {
       name: this.state.name || undefined,
       email: this.state.email || undefined,
       password: this.state.password || undefined,
-      about: this.state.about || undefined
+      seller: this.state.seller
     };
 
-    update(
-      { userId: this.match.params.userId },
-      { t: jwt.token },
-      this.userData
-    ).then(data => {
-      if (data.error) {
-        this.setState({ error: data.error });
-      } else {
-        this.setState({ id: data._id, redirectToProfile: true });
+    update({ userId: this.match.params.userId }, { t: jwt.token }, user).then(
+      data => {
+        if (data.error) {
+          this.setState({ error: data.error });
+        } else {
+          auth.updateUser(data, () =>
+            this.setState({ id: data._id, redirectToProfile: true })
+          );
+        }
       }
-    });
+    );
   };
 
   handleChange = name => event => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value;
-    this.userData.set(name, value);
-    this.setState({ [name]: value });
+    this.setState({ [name]: event.target.value });
+  };
+
+  handleCheck = (event, checked) => {
+    this.setState({ seller: checked });
   };
 
   render() {
@@ -128,23 +134,6 @@ class EditProfile extends Component {
     return (
       <Card className={classes.card}>
         <CardHeader title="Edit Profile" />
-        <Avatar src={photoUrl} className={classes.bigAvatar} />
-        <br />
-        <input
-          accept="image/*"
-          className={classes.input}
-          id="icon-button-file"
-          type="file"
-          onChange={this.handleChange("photo")}
-        />
-        <label htmlFor="icon-button-file">
-          <Button variant="contained" color="default" component="span">
-            Upload &nbsp; <FileCopy />
-          </Button>
-        </label>
-        <span className={classes.filename}>
-          {this.state.photo ? this.state.photo.name : ""}
-        </span>
         <CardContent>
           <TextField
             id="name"
@@ -152,17 +141,6 @@ class EditProfile extends Component {
             className={classes.textField}
             value={this.state.name}
             onChange={this.handleChange("name")}
-            margin="normal"
-          />{" "}
-          <br />
-          <TextField
-            id="multiline-flexible"
-            label="About"
-            multiline
-            rows="2"
-            value={this.state.about}
-            className={classes.textField}
-            onChange={this.handleChange("about")}
             margin="normal"
           />{" "}
           <br />
@@ -186,6 +164,23 @@ class EditProfile extends Component {
             margin="normal"
           />{" "}
           <br />
+          <Typography
+            type="subheading"
+            component="h4"
+            className={classes.subheading}
+          >
+            Seller Account
+          </Typography>
+          <FormControlLabel
+            control={
+              <Switch
+                classes={{ checked: classes.checked, bar: classes.bar }}
+                checked={this.state.seller}
+                onChange={this.handleCheck}
+              ></Switch>
+            }
+            label={this.state.seller ? "Active" : "Inactive"}
+          ></FormControlLabel>
           {this.state.error && (
             <Typography component="p" color="error">
               <Icon color="error" className={classes.error}>
