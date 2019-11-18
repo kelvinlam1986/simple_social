@@ -1,2 +1,3 @@
-# simple_social
-Simple social networking
+# MERN Market
+
+Simple marker place
