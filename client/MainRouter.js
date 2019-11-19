@@ -8,6 +8,7 @@ import Profile from "./user/Profile";
 import EditProfile from "./user/EditProfile";
 import PrivateRoute from "./auth/PrivateRoute";
 import Menu from "./core/Menu";
+import NewShop from "./shop/NewShop";
 
 class MainRouter extends Component {
   render() {
@@ -21,6 +22,7 @@ class MainRouter extends Component {
           <Route path="/signin" component={SignIn} />
           <PrivateRoute path="/user/edit/:userId" component={EditProfile} />
           <Route path="/user/:userId" component={Profile} />
+          <PrivateRoute path="/seller/shop/new" component={NewShop} />
         </Switch>
       </div>
     );

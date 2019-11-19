@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import seashellImg from "./../assets/images/seashell.jpg";
 import auth from "../auth/auth-helper";
 import { Link } from "react-router-dom";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -84,7 +84,9 @@ class Home extends Component {
         {!defaultPage && (
           <Grid container spacing={24}>
             <Grid item xs={8} sm={7}>
-              Helllo
+              <Link to="/seller/shop/new">
+                <Button variant="contained">New Shop</Button>
+              </Link>
             </Grid>
             <Grid item xs={6} sm={5}>
               World
