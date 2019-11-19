@@ -14,6 +14,8 @@ router
     shopCtrl.create
   );
 
+router.route("/api/shops").get(shopCtrl.list);
+
 router.param("userId", userCtrl.userByID);
 
 export default router;

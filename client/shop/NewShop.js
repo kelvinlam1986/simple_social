@@ -102,7 +102,7 @@ class NewShop extends Component {
         <Card className={classes.card}>
           <CardContent>
             <Typography
-              type="headline"
+              variant="headline"
               component="h2"
               className={classes.title}
             >

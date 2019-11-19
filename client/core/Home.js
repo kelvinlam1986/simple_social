@@ -89,7 +89,9 @@ class Home extends Component {
               </Link>
             </Grid>
             <Grid item xs={6} sm={5}>
-              World
+              <Link to="/shops/all">
+                <Button variant="contained">All Shops</Button>
+              </Link>
             </Grid>
           </Grid>
         )}
