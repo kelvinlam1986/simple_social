@@ -7,7 +7,7 @@ import SignIn from "./auth/Signin";
 import Profile from "./user/Profile";
 import EditProfile from "./user/EditProfile";
 import PrivateRoute from "./auth/PrivateRoute";
-import Menu from "./core/Menu";
+import ResponsiveMenu from "./core/ResponsiveMenu";
 import NewShop from "./shop/NewShop";
 import Shops from "./shop/Shops";
 
@@ -15,7 +15,7 @@ class MainRouter extends Component {
   render() {
     return (
       <div>
-        <Menu />
+        <ResponsiveMenu />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/users" component={Users} />

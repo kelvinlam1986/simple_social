@@ -15,9 +15,17 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
+import Paper from "@material-ui/core/Paper";
 import { create } from "./api-user";
 
 const styles = theme => ({
+  root: theme.mixins.gutters({
+    maxWidth: 600,
+    margin: "auto",
+    padding: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 5,
+    marginBottom: theme.spacing.unit * 3
+  }),
   card: {
     maxWidth: 600,
     margin: "auto",
@@ -73,7 +81,7 @@ class SignUp extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <Paper elevation={4} className={classes.root}>
         <Card className={classes.card}>
           <CardHeader title="Sign Up" />
           <CardContent>
@@ -141,7 +149,7 @@ class SignUp extends Component {
             </Link>
           </DialogActions>
         </Dialog>
-      </div>
+      </Paper>
     );
   }
 }
