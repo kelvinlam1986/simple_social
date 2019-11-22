@@ -9,12 +9,12 @@ import Typography from "@material-ui/core/Typography";
 import seashellImg from "./../assets/images/seashell.jpg";
 import auth from "../auth/auth-helper";
 import { Link } from "react-router-dom";
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, Paper } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: 30
+    margin: 100
   },
   card: {
     maxWidth: 600,
@@ -82,18 +82,20 @@ class Home extends Component {
           </Grid>
         )}
         {!defaultPage && (
-          <Grid container spacing={24}>
-            <Grid item xs={8} sm={7}>
-              <Link to="/seller/shop/new">
-                <Button variant="contained">New Shop</Button>
-              </Link>
+          <Paper style={{ marginTop: 20 }}>
+            <Grid container spacing={24}>
+              <Grid item xs={8} sm={7}>
+                <Link to="/seller/shop/new">
+                  <Button variant="contained">New Shop</Button>
+                </Link>
+              </Grid>
+              <Grid item xs={6} sm={5}>
+                <Link to="/shops/all">
+                  <Button variant="contained">All Shops</Button>
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item xs={6} sm={5}>
-              <Link to="/shops/all">
-                <Button variant="contained">All Shops</Button>
-              </Link>
-            </Grid>
-          </Grid>
+          </Paper>
         )}
       </div>
     );

@@ -28,7 +28,8 @@ const styles = theme => ({
   card: {
     maxWidth: 600,
     margin: "auto",
-    marginTop: theme.spacing.unit * 5
+    marginTop: theme.spacing.unit * 5,
+    textAlign: "center"
   },
   textField: {
     marginLeft: theme.spacing.unit,

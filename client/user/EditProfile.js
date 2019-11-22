@@ -13,9 +13,15 @@ import CardHeader from "@material-ui/core/CardHeader";
 import auth from "../auth/auth-helper";
 import { read, update } from "./api-user";
 import defaultPhoto from "../assets/images/profile-pic.png";
-import { FormControlLabel, Switch } from "@material-ui/core";
+import { FormControlLabel, Switch, Paper } from "@material-ui/core";
 
 const styles = theme => ({
+  root: theme.mixins.gutters({
+    maxWidth: 600,
+    margin: "auto",
+    padding: theme.spacing.unit * 3,
+    marginTop: 100
+  }),
   card: {
     maxWidth: 600,
     margin: "auto",
@@ -132,75 +138,77 @@ class EditProfile extends Component {
     }
 
     return (
-      <Card className={classes.card}>
-        <CardHeader title="Edit Profile" />
-        <CardContent>
-          <TextField
-            id="name"
-            label="Name"
-            className={classes.textField}
-            value={this.state.name}
-            onChange={this.handleChange("name")}
-            margin="normal"
-          />{" "}
-          <br />
-          <TextField
-            id="email"
-            label="Email"
-            type="email"
-            className={classes.textField}
-            onChange={this.handleChange("email")}
-            value={this.state.email}
-            margin="normal"
-          />{" "}
-          <br />
-          <TextField
-            id="password"
-            label="Password"
-            type="password"
-            className={classes.textField}
-            onChange={this.handleChange("password")}
-            value={this.state.password}
-            margin="normal"
-          />{" "}
-          <br />
-          <Typography
-            type="subheading"
-            component="h4"
-            className={classes.subheading}
-          >
-            Seller Account
-          </Typography>
-          <FormControlLabel
-            control={
-              <Switch
-                classes={{ checked: classes.checked, bar: classes.bar }}
-                checked={this.state.seller}
-                onChange={this.handleCheck}
-              ></Switch>
-            }
-            label={this.state.seller ? "Active" : "Inactive"}
-          ></FormControlLabel>
-          {this.state.error && (
-            <Typography component="p" color="error">
-              <Icon color="error" className={classes.error}>
-                error
-              </Icon>
-              {this.state.error}
+      <Paper className={classes.root} elevation={4}>
+        <Card className={classes.card}>
+          <CardHeader title="Edit Profile" />
+          <CardContent>
+            <TextField
+              id="name"
+              label="Name"
+              className={classes.textField}
+              value={this.state.name}
+              onChange={this.handleChange("name")}
+              margin="normal"
+            />{" "}
+            <br />
+            <TextField
+              id="email"
+              label="Email"
+              type="email"
+              className={classes.textField}
+              onChange={this.handleChange("email")}
+              value={this.state.email}
+              margin="normal"
+            />{" "}
+            <br />
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              className={classes.textField}
+              onChange={this.handleChange("password")}
+              value={this.state.password}
+              margin="normal"
+            />{" "}
+            <br />
+            <Typography
+              type="subheading"
+              component="h4"
+              className={classes.subheading}
+            >
+              Seller Account
             </Typography>
-          )}
-        </CardContent>
-        <CardActions>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={this.clickSubmit}
-            className={classes.submit}
-          >
-            Submit
-          </Button>
-        </CardActions>
-      </Card>
+            <FormControlLabel
+              control={
+                <Switch
+                  classes={{ checked: classes.checked, bar: classes.bar }}
+                  checked={this.state.seller}
+                  onChange={this.handleCheck}
+                ></Switch>
+              }
+              label={this.state.seller ? "Active" : "Inactive"}
+            ></FormControlLabel>
+            {this.state.error && (
+              <Typography component="p" color="error">
+                <Icon color="error" className={classes.error}>
+                  error
+                </Icon>
+                {this.state.error}
+              </Typography>
+            )}
+          </CardContent>
+          <CardActions>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={this.clickSubmit}
+              className={classes.submit}
+            >
+              Submit
+            </Button>
+          </CardActions>
+        </Card>
+      </Paper>
     );
   }
 }

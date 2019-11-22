@@ -21,7 +21,7 @@ const style = theme => ({
     maxWidth: 600,
     margin: "auto",
     padding: theme.spacing.unit * 3,
-    marginTop: theme.spacing.unit * 5,
+    marginTop: 100,
     marginBottom: theme.spacing.unit * 3
   }),
   title: {

@@ -9,13 +9,20 @@ import {
   TextField,
   CardActions,
   Button,
-  Icon
+  Icon,
+  Paper
 } from "@material-ui/core";
 import { Image } from "@material-ui/icons";
 import auth from "../auth/auth-helper";
 import { create } from "./api-shop";
 
 const style = theme => ({
+  root: theme.mixins.gutters({
+    maxWidth: 600,
+    margin: "auto",
+    padding: theme.spacing.unit * 3,
+    marginTop: 100
+  }),
   card: {
     maxWidth: 600,
     margin: "auto",
@@ -98,7 +105,7 @@ class NewShop extends Component {
     }
     const { classes } = this.props;
     return (
-      <div>
+      <Paper className={classes.root} elevation={4}>
         <Card className={classes.card}>
           <CardContent>
             <Typography
@@ -168,7 +175,7 @@ class NewShop extends Component {
             </Link>
           </CardActions>
         </Card>
-      </div>
+      </Paper>
     );
   }
 }
