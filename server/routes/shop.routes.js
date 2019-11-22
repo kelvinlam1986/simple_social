@@ -15,6 +15,9 @@ router
   );
 
 router.route("/api/shops").get(shopCtrl.list);
+router
+  .route("/api/shops/by/:userId")
+  .get(authCtrl.requireSignin, authCtrl.hasAuthorization, shopCtrl.listByOwner);
 
 router.param("userId", userCtrl.userByID);
 

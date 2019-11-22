@@ -94,6 +94,11 @@ class Home extends Component {
                   <Button variant="contained">All Shops</Button>
                 </Link>
               </Grid>
+              <Grid item xs={6} sm={5}>
+                <Link to="/seller/shops">
+                  <Button variant="contained">My Shops</Button>
+                </Link>
+              </Grid>
             </Grid>
           </Paper>
         )}

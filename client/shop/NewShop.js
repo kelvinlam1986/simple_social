@@ -108,11 +108,7 @@ class NewShop extends Component {
       <Paper className={classes.root} elevation={4}>
         <Card className={classes.card}>
           <CardContent>
-            <Typography
-              variant="headline"
-              component="h2"
-              className={classes.title}
-            >
+            <Typography variant="h5" component="h2" className={classes.title}>
               New Shop
             </Typography>
             <br />

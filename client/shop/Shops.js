@@ -89,7 +89,7 @@ class Shops extends Component {
                     </ListItemAvatar>
                     <div className={classes.details}>
                       <Typography
-                        variant="headline"
+                        variant="h5"
                         component="h2"
                         color="primary"
                         className={classes.shopTitle}
