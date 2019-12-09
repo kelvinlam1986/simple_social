@@ -2,6 +2,7 @@ import fs from "fs";
 import formidable from "formidable";
 import Shop from "../models/shop.model";
 import errorHandler from "../helpers/dbErrorHandler";
+import _ from "lodash";
 
 const create = (req, res, next) => {
   let form = formidable.IncomingForm();
@@ -74,10 +75,49 @@ const shopByID = (req, res, next, id) => {
     });
 };
 
+const update = (req, res, next) => {
+  let form = formidable.IncomingForm();
+  form.keepExtensions = true;
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      res.status(400).json({
+        message: "Image could not be uploaded"
+      });
+    }
+    let shop = req.shop;
+    shop = _.extend(shop, fields);
+    shop.updated = Date.now();
+    if (files.image) {
+      shop.image.data = fs.readFileSync(files.image.path);
+      shop.image.contentType = files.image.type;
+    }
+    shop.save((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        });
+      }
+      res.json(shop);
+    });
+  });
+};
+
+const isOwner = (req, res, next) => {
+  const isOwner = req.shop && req.auth && req.shop.owner._id == req.auth._id;
+  if (!isOwner) {
+    res.status(403).json({
+      error: "User is not authorized"
+    });
+  }
+  next();
+};
+
 export default {
   create,
   list,
   listByOwner,
   read,
-  shopByID
+  shopByID,
+  isOwner,
+  update
 };

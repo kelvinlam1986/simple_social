@@ -84,7 +84,6 @@ class ResponsiveMenu extends Component {
               <Menu
                 style={{ padding: 0, color: "right", cursor: "pointer" }}
                 onClick={() => {
-                  console.log("On clicked menu");
                   this.setState({ drawer: true });
                 }}
               ></Menu>

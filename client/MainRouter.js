@@ -12,6 +12,7 @@ import NewShop from "./shop/NewShop";
 import Shops from "./shop/Shops";
 import MyShops from "./shop/MyShops";
 import Shop from "./shop/Shop";
+import EditShop from "./shop/EditShop";
 
 class MainRouter extends Component {
   render() {
@@ -29,6 +30,7 @@ class MainRouter extends Component {
           <Route path="/shops/all" component={Shops} />
           <Route path="/shops/:shopId" component={Shop} />
           <PrivateRoute path="/seller/shops" component={MyShops} />
+          <PrivateRoute path="/seller/shop/edit/:shopId" component={EditShop} />
         </Switch>
       </div>
     );
