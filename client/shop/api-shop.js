@@ -60,4 +60,16 @@ const update = (params, credentials, shop) => {
     .catch(err => console.log(err));
 };
 
-export { create, list, listByOwner, read, update };
+const remove = (params, credentials) => {
+  return fetch("/api/shops/" + params.shopId, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      Authorization: "Bearer " + credentials.t
+    }
+  })
+    .then(res => res.json())
+    .catch(err => console.log(err));
+};
+
+export { create, list, listByOwner, read, update, remove };
